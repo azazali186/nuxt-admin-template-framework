@@ -1,5 +1,14 @@
 <template>
   <NuxtLayout>
-     <h1>Users</h1>
-</NuxtLayout>
+    <div>
+      <h1>Users Management</h1>
+    </div>
+    <div>
+      <TableVue />
+    </div>
+  </NuxtLayout>
 </template>
+
+<script setup>
+import TableVue from "~/components/TableVue.vue";
+</script>
