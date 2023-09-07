@@ -1,0 +1,356 @@
+:root {
+  --primary-text: #fff;
+  --primary-color: #ffffff;
+  --primary-background-color: #0b1f50;
+
+  --primary-surface-text-color: #ffffff;
+  --primary-background-surface: #0b1f50;
+  --background-color: #18181b;
+  --item-option-border: #ffffff;
+}
+
+
+.p-1 {
+  padding: 4px;
+}
+.p-2 {
+  padding: 8px;
+}
+.p-3 {
+  padding: 12px;
+}
+.p-4 {
+  padding: 16px;
+}
+.p-5 {
+  padding: 20px;
+}
+.p-6 {
+  padding: 24px;
+}
+.p-7 {
+  padding: 28px;
+}
+.p-8 {
+  padding: 32px;
+}
+.p-9 {
+  padding: 36px;
+}
+.p-10 {
+  padding: 40px;
+}
+
+.w-100 {
+  width: calc(100% - 250px);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  color: var(--primary-color);
+  background: url("~/assets/img/main-bg.webp")
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  height: 50px;
+  line-height: 40px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding-left: 10px;
+  border: solid var(--primary-color);
+  width: 100%;
+  border-width: 1px 0 0 0;
+}
+
+.card {
+  border-radius: 4px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--primary-color);
+  width: fit-content;
+  padding: 8px;
+  background: var(--primary-background-surface);
+}
+
+.header {
+  top: 0;
+  position: sticky;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  line-height: 40px;
+  border: solid var(--primary-color);
+  width: 100%;
+  padding-left: 10px;
+  border-width: 0 0 1px 0;
+  justify-content: space-between;
+}
+
+.header > .title{
+  margin-left: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.header > .header-icons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  font-size: 1.5rem;
+  margin-right: 30px;
+  font-weight: 600;
+  background: transparent;
+}
+
+.header > .header-icons > span{
+  display: flex;
+  background: transparent;
+}
+
+.header > .header-icons > span > svg {
+  background: transparent;
+}
+
+.layout {
+  height: 100dvh;
+  width: 100%;
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  overflow: scroll;
+  border-right: 1px solid var(--primary-color);
+  border-radius: 12px;
+  padding: 12px;
+}
+.sidebar::-webkit-scrollbar {
+  display: none !important;
+}
+
+.active-nav> .sidebar-icon{
+  font-size: 2rem !important;
+  display: flex;
+}
+
+.active-nav > .sidebar-title{
+  font-size: 1.5rem !important;
+  text-transform: uppercase !important;
+}
+
+.nav-head {
+  display: flex;
+}
+.page-content {
+  height: calc(100% - 120px);
+  overflow: scroll;
+}
+
+.page-content::-webkit-scrollbar {
+  display: none !important;
+}
+
+.sidebar-menu-item,
+.sidebar-menu,
+.sidebar-item{
+  color: var(--primary-color);
+  background: transparent;
+  font-size: 1.5rem;
+  width: 90%;
+  border-radius: 12px;
+  display: flex;
+  border-radius: 0 !important;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  align-items: center;
+  align-content: center;
+  cursor: pointer;
+}
+
+.sidebar-menu-item > .sidebar-icon,
+.sidebar-menu > .sidebar-icon,
+.sidebar-item > .sidebar-icon{
+  font-size: 1.5rem;
+  display: flex;
+}
+
+.sidebar-menu{
+  border-radius: 0 !important;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.sidebar-menu-item > .sidebar-title,
+.sidebar-menu > .sidebar-title,
+.sidebar-item > .sidebar-title{
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  margin-left: 10px;
+}
+
+
+.sidebar-menu-item-box{
+  width: auto;
+  position: relative;
+  border-radius: 2px solid var(--item-option-border);
+  left: 20px;
+  display: none;
+}
+
+.divider{
+  border: 1px solid var(--primary-color);
+}
+
+.sidebar-menu:hover~ .sidebar-menu-item-box{
+  display: block;
+}
+
+.sidebar-menu-item-box:hover{
+  display: block;
+}
+
+a:-webkit-any-link {
+  text-decoration: none !important;
+}
+
+.card-corner {
+  background-color: var(--primary-background-surface);
+  width: fit-content;
+  padding: 5px;
+  margin: 5px;
+  position: relative;
+  
+}
+.corner {
+  position: absolute;
+}
+.card-corner .corner {
+  background: none;
+  height: 10px;
+  width: 10px;
+}
+.card-corner > #top-left {
+  top: 0;
+  left: 0;
+  border-top: 3px solid var(--primary-color);
+  border-left: 3px solid var(--primary-color);
+}
+.card-corner > #top-right {
+  top: 0;
+  right: 0;
+  border-top: 3px solid var(--primary-color);
+  border-right: 3px solid var(--primary-color);
+}
+.card-corner > #bottom-right {
+  bottom: 0;
+  right: 0;
+  border-bottom: 3px solid var(--primary-color);
+  border-right: 3px solid var(--primary-color);
+}
+.card-corner > #bottom-left {
+  bottom: 0;
+  left: 0;
+  border-bottom: 3px solid var(--primary-color);
+  border-left: 3px solid var(--primary-color);
+}
+
+#profile{
+  display: flex;
+  cursor: pointer;
+}
+
+#profile:hover~ .profile-model{
+  display: flex !important;
+}
+
+.profile-model{
+  display: none;
+  right: 20px;
+  min-height: 200px;
+  min-width: 150px;
+  position: absolute;
+  border: 1px solid var(--primary-color);
+  padding: 4px;
+  top: 40px;
+  cursor: pointer;
+}
+
+.profile-model:hover{
+  display:flex;
+}
+
+#languages{
+  display: flex;
+  cursor: pointer;
+}
+
+#languages:hover~ .languages-model{
+  display: flex !important;
+}
+
+.languages-model{
+  display: none;
+  right: 160px;
+  position: absolute;
+  border: 1px solid var(--primary-color);
+  padding: 4px;
+  top: 40px;
+  cursor: pointer;
+}
+
+.languages-model:hover{
+  display:flex;
+}
+
+#mode{
+  display: flex;
+  cursor: pointer;
+}
+
+#mode:hover~ .mode-model{
+  display: flex !important;
+}
+
+.mode-model{
+  display: none;
+  right: 110px;
+  position: absolute;
+  border: 1px solid var(--primary-color);
+  padding: 4px;
+  top: 40px;
+  cursor: pointer;
+}
+
+.mode-model:hover{
+  display:flex;
+}
+
+#notifications{
+  display: flex;
+  cursor: pointer;
+}
+
+#notifications:hover~ .notifications-model{
+  display: flex !important;
+}
+
+.notifications-model{
+  display: none;
+  right: 60px;
+  position: absolute;
+  border: 1px solid var(--primary-color);
+  padding: 4px;
+  top: 40px;
+  cursor: pointer;
+}
+
+.notifications-model:hover{
+  display:flex;
+}

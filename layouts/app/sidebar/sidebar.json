@@ -1,0 +1,88 @@
+[
+    {
+        "name": "Dashboard",
+        "path":"/",
+        "icon": "clarity:dashboard-line",
+        "permissions": [],
+        "childs": []
+    },
+    {
+        "name": "Settings",
+        "path":"",
+        "icon": "iconoir:tools",
+        "permissions": [],
+        "childs": [
+            {
+                "name": "Users",
+                "path":"/settings/users",
+                "icon": "raphael:users",
+                "permissions": [],
+                "childs": []
+            },
+            {
+                "name": "Members",
+                "path":"/settings/members",
+                "icon": "la:users",
+                "permissions": [],
+                "childs": []
+            },
+            {
+                "name": "Languages",
+                "path":"/settings/languages",
+                "icon": "lucide:languages",
+                "permissions": [],
+                "childs": []
+            },
+            {
+                "name": "Roles",
+                "path":"/settings/roles",
+                "icon": "arcticons:permissionsmanager",
+                "permissions": [],
+                "childs": []
+            },
+            {
+                "name": "Permissions",
+                "path":"/settings/permissions",
+                "icon": "fluent-mdl2:permissions",
+                "permissions": [],
+                "childs": []
+            },
+            {
+                "name": "Countries",
+                "path":"/settings/countries",
+                "icon": "arcticons:flags",
+                "permissions": [],
+                "childs": []
+            }
+        ]
+    },
+    {
+        "name": "Generator",
+        "path":"",
+        "icon": "carbon:id-management",
+        "permissions": [],
+        "childs": [
+            {
+                "name": "Report",
+                "path":"/generator/reports-generator",
+                "icon": "tabler:report",
+                "permissions": [],
+                "childs": []
+            },
+            {
+                "name": "Form",
+                "path":"/generator/forms-generator",
+                "icon": "mdi:form-outline",
+                "permissions": [],
+                "childs": []
+            },
+            {
+                "name": "CRUD",
+                "path":"/generator/crud-generator",
+                "icon": "codicon:git-pull-request-create",
+                "permissions": [],
+                "childs": []
+            }
+        ]
+    }
+]
