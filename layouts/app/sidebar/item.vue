@@ -10,8 +10,8 @@ import { Icon } from "@iconify/vue";
 const props = defineProps({ data: Object, menuName: String});
 const data = ref(props.data);
 const menuName = ref(props.menuName);
-import { useHeaderStore } from "../../../store/headerStore"
-const store = useHeaderStore()
+import { useCommonStore } from "../../../store/commonStore"
+const store = useCommonStore()
 
 const setAttributes = () => {
   store.setHeaderStore(data.value.name)

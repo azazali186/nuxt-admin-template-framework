@@ -15,6 +15,6 @@ import Item from "./item.vue";
 import { Icon } from "@iconify/vue";
 const props = defineProps({ data: Object });
 const data = ref(props.data);
-import { useHeaderStore } from "../../../store/headerStore"
-const store = useHeaderStore()
+import { useCommonStore } from "../../../store/commonStore"
+const store = useCommonStore()
 </script>

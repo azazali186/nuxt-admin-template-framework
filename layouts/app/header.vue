@@ -34,6 +34,6 @@
 
 <script setup>
 import { Icon } from "@iconify/vue";
-import { useHeaderStore } from "../../../store/headerStore";
-const store = useHeaderStore();
+import { useCommonStore } from "../../../store/commonStore";
+const store = useCommonStore();
 </script>

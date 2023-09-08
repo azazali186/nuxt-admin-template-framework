@@ -45,6 +45,10 @@
   width: calc(100% - 250px);
 }
 
+.text-right	{
+  text-align: right;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -354,3 +358,71 @@ a:-webkit-any-link {
 .notifications-model:hover{
   display:flex;
 }
+
+input{
+  --tw-ring-opacity: 0 !important;
+  background: transparent !important;
+  color: var(--primary-color) !important;
+  outline: 1px solid var(--primary-color) !important;
+  border-radius: 50px !important;
+}
+
+.filter-select{
+  background: transparent !important;
+}
+
+.filter-select > div > button{
+  background: transparent !important;
+  --tw-ring-opacity: 0;
+  border-radius: 50px;
+  outline: 1px solid var(--primary-color) !important;
+}
+.filter-select > div > button > span {
+  background: transparent !important;
+}
+
+
+.filter-search > span{
+  background: transparent !important;
+}
+
+.rows-select > select{
+  background: transparent;
+  color: var(--primary-color);
+  --tw-ring-opacity: 0;
+  outline: 1px solid var(--primary-color);
+}
+
+.rows-select > span{
+  background: transparent !important;
+}
+
+table,
+thead,
+tbody,
+th,
+tr,
+td{
+  color: var(--primary-color) !important;
+}
+
+.pagination-block{
+  background: transparent;
+}
+
+.pagination-block > button{
+  background: transparent;
+}
+
+.pagination-block > button > span {
+  background: transparent;
+}
+
+.pagination-block > button:hover{
+  color: var(--background-color);
+}
+
+.pagination-block > button > span:hover {
+  color: var(--background-color);
+}
+

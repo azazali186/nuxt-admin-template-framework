@@ -14,9 +14,11 @@
     "nuxt": "latest"
   },
   "dependencies": {
+    "@element-plus/nuxt": "^1.0.5",
     "@nuxt/types": "latest",
     "@nuxt/typescript-build": "latest",
     "@nuxt/typescript-runtime": "latest",
+    "@nuxt/ui": "^2.8.0",
     "@pinia/nuxt": "latest",
     "pinia": "latest"
   }
