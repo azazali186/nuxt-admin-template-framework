@@ -85,10 +85,8 @@ onMounted(() => {
   if (!columns.value)
     if (data?.value?.length > 0) {
       columns.value = getColumnName(Object.keys(data.value[0]));
-      console.log("columns  onMounted = ", columns.value);
     }
 });
-console.log("columns   = ", columns?.value);
 
 const getColumnName = (columnsName) => {
   const data = [];
