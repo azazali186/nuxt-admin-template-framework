@@ -42,7 +42,8 @@
 }
 
 .w-100 {
-  width: calc(100% - 250px);
+  /* width: calc(100% - 250px); */
+  width: 100%;
 }
 
 .text-right	{

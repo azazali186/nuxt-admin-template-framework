@@ -7,7 +7,7 @@
       class="px-10 py-3 flex justify-center items-center bg-transparent w-full gap-5 relative overflow-x-auto"
     >
       <table class="table w-full text-sm text-left" v-if="data?.length > 0">
-        <thead class="text-xs uppercase">
+        <thead class="text-xs uppercase sticky top-0">
           <tr>
             <td
             scope="col"

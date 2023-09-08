@@ -19,4 +19,7 @@
 import AppHeader from "./app/header";
 import AppFooter from "./app/footer";
 import AppSidebar from "./app/sidebar";
+import { useCommonStore } from "../store/commonStore";
+const store = useCommonStore();
+store.init()
 </script>
