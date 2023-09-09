@@ -10,6 +10,39 @@
 }
 
 
+* {
+  padding: 0;
+  margin: 0;
+  color: var(--primary-color);
+}
+
+ul {
+  background: transparent;
+}
+
+[role="listbox"] {
+  background: transparent;
+  backdrop-filter: blur(2px);
+}
+
+[role="listbox"] > li > span > span{
+  color: var(--primary-color);
+}
+
+body{
+  background: url("~/assets/img/main-bg.webp")
+}
+
+table, 
+tbody,
+thead,
+td,
+th,
+tr
+{
+  background: tra;
+}
+
 .p-1 {
   padding: 4px;
 }
@@ -50,12 +83,6 @@
   text-align: right;
 }
 
-* {
-  padding: 0;
-  margin: 0;
-  color: var(--primary-color);
-  background: url("~/assets/img/main-bg.webp")
-}
 
 .footer {
   position: sticky;
@@ -69,6 +96,7 @@
   border: solid var(--primary-color);
   width: 100%;
   border-width: 1px 0 0 0;
+  background: transparent;
 }
 
 .card {
@@ -95,6 +123,7 @@
   padding-left: 10px;
   border-width: 0 0 1px 0;
   justify-content: space-between;
+  background: transparent;
 }
 
 .header > .title{
@@ -156,6 +185,7 @@
 .page-content {
   height: calc(100% - 120px);
   overflow: scroll;
+  background: transparent;
 }
 
 .page-content::-webkit-scrollbar {
@@ -427,3 +457,14 @@ td{
   color: var(--background-color);
 }
 
+.ml-2-i{
+  margin-left: 8px !important;
+}
+
+.bg-transparent-all{
+  background: transparent;
+}
+
+.bg-transparent-all > button > span {
+  background: transparent;
+}
