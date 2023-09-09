@@ -315,6 +315,7 @@ a:-webkit-any-link {
   padding: 4px;
   top: 40px;
   cursor: pointer;
+  backdrop-filter: blur(4px);
 }
 
 .profile-model:hover{
@@ -338,6 +339,7 @@ a:-webkit-any-link {
   padding: 4px;
   top: 40px;
   cursor: pointer;
+  backdrop-filter: blur(4px);
 }
 
 .languages-model:hover{
@@ -361,6 +363,7 @@ a:-webkit-any-link {
   padding: 4px;
   top: 40px;
   cursor: pointer;
+  backdrop-filter: blur(4px);
 }
 
 .mode-model:hover{
@@ -384,6 +387,7 @@ a:-webkit-any-link {
   padding: 4px;
   top: 40px;
   cursor: pointer;
+  backdrop-filter: blur(4px);
 }
 
 .notifications-model:hover{

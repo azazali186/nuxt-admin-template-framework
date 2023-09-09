@@ -15,7 +15,9 @@
         variant="outline"
         value-attribute="name"
         option-attribute="name"
-        :ui-menu="{ option: { base: 'cursor-pointer uppercase bg-transparent-all' } }"
+        :ui-menu="{
+          option: { base: 'cursor-pointer uppercase bg-transparent-all' },
+        }"
       >
         <UButton color="transparent" variant="outline" class="px-4 ml-10">
           {{
@@ -44,10 +46,14 @@
           value-attribute="value"
           option-attribute="value"
           icon="material-symbols:check"
-          :ui-menu="{ option: { base: 'cursor-pointer bg-transparent-all'} }"
-          :ui="{ option: { base: 'cursor-pointer bg-transparent-all'} }"
+          :ui-menu="{ option: { base: 'cursor-pointer bg-transparent-all' } }"
+          :ui="{ option: { base: 'cursor-pointer bg-transparent-all' } }"
         >
-          <UButton color="transparent" variant="outline" class="px-4 ml-5 bg-transparent-all">
+          <UButton
+            color="transparent"
+            variant="outline"
+            class="px-4 ml-5 bg-transparent-all"
+          >
             {{ pageCount }}
           </UButton>
         </USelectMenu>
@@ -100,19 +106,37 @@
       </UPagination>
     </div>
 
-    <div class="ml-10 mb-3 bg-transparent-all">
-      <UInput
-        v-model="queryFilter"
-        class="w-1/4 bg-transparent-all p-2 bg-transparent-all"
-        placeholder="Filter ..."
-        :onchange="filteredRows"
-      />
+    <div class="flex justify-between items-center w-100">
+      <div class="ml-10 mb-3 bg-transparent-all">
+        <UInput
+          v-model="queryFilter"
+          class="bg-transparent-all p-2 bg-transparent-all w-100"
+          placeholder="Filter ..."
+          :onchange="filteredRows"
+        />
+      </div>
+      <div class="flex gap-5 justify-between items-center mr-10">
+        <UButton
+            color="transparent"
+            variant="outline"
+            class="rtl:[&_span:last-child]:rotate-180 ml-2-i bg-transparent-all"
+          >
+            Add
+            <Icon
+              icon="zondicons:add-outline"
+              class="w-5 h-5 transition-transform bg-transparent-all"
+            />
+          </UButton>
+      </div>
     </div>
 
     <div
       class="px-10 py-3 flex justify-center items-center bg-transparent-all w-full gap-5 relative overflow-x-auto"
     >
-      <table class="table w-full text-sm text-left bg-transparent-all" v-if="data?.length > 0">
+      <table
+        class="table w-full text-sm text-left bg-transparent-all"
+        v-if="data?.length > 0"
+      >
         <thead class="text-xs uppercase sticky top-0">
           <tr>
             <th
@@ -145,8 +169,11 @@
               v-for="(col, index) in selectedColumns"
               :key="index"
             >
-            <div v-if="isHTML(item[col.toLowerCase()])" v-html="item[col.toLowerCase()]"></div>
-            <div v-else>{{ item[col.toLowerCase()] }}</div>
+              <div
+                v-if="isHTML(item[col.toLowerCase()])"
+                v-html="item[col.toLowerCase()]"
+              ></div>
+              <div v-else>{{ item[col.toLowerCase()] }}</div>
             </td>
           </tr>
         </tbody>
@@ -165,7 +192,11 @@
           option-attribute="value"
           :ui-menu="{ option: { base: 'cursor-pointer bg-transparent-all' } }"
         >
-          <UButton color="transparent" variant="outline" class="px-4 ml-5 bg-transparent-all">
+          <UButton
+            color="transparent"
+            variant="outline"
+            class="px-4 ml-5 bg-transparent-all"
+          >
             {{ pageCount }}
           </UButton>
         </USelectMenu>
@@ -228,7 +259,7 @@ const data = ref(props.data);
 const filteredData = ref(props.data);
 const title = ref(props.title);
 const columns = ref(props.columns);
-import Card from "./CardVue.vue"
+import Card from "./CardVue.vue";
 const page = ref(1);
 const pageCount = ref(5);
 const pageCountData = ref([
@@ -258,7 +289,6 @@ const classString = ref(
 );
 
 const queryFilter = ref("");
-
 
 onMounted(() => {
   if (!columns.value)
@@ -331,7 +361,7 @@ const getColumnNameObject = (columnsName) => {
 };
 
 const isHTML = (str) => {
-      const doc = new DOMParser().parseFromString(str, "text/html");
-      return Array.from(doc.body.childNodes).some(node => node.nodeType === 1); // Node type 1 is an element node
-    }
+  const doc = new DOMParser().parseFromString(str, "text/html");
+  return Array.from(doc.body.childNodes).some((node) => node.nodeType === 1); // Node type 1 is an element node
+};
 </script>
