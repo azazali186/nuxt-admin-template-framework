@@ -13,7 +13,6 @@
         placeholder="Columns"
         icon="material-symbols:check"
         variant="outline"
-        value-attribute="name"
         option-attribute="name"
         :ui-menu="{
           option: { base: 'cursor-pointer uppercase bg-transparent-all' },
@@ -23,7 +22,7 @@
           {{
             selectedColumns
               .map((v) => {
-                return v.toUpperCase();
+                return v.name.toUpperCase();
               })
               .join(" ,")
           }}
@@ -156,7 +155,7 @@
               v-for="(col, index) in selectedColumns"
               :key="index"
             >
-              {{ col }}
+              {{ col.name }}
             </th>
           </tr>
         </thead>
@@ -175,10 +174,10 @@
               :key="index"
             >
               <div
-                v-if="isHTML(item[col.toLowerCase()])"
-                v-html="item[col.toLowerCase()]"
+                v-if="isHTML(item[col?.name?.toLowerCase()])"
+                v-html="item[col?.name?.toLowerCase()]"
               ></div>
-              <div v-else>{{ item[col.toLowerCase()] }}</div>
+              <div v-else>{{ item[col?.name?.toLowerCase()] }}</div>
             </td>
           </tr>
         </tbody>
@@ -351,7 +350,6 @@ const init = computed(() => {
 
 init;
 
-console.log("selectedColumns.value   ", selectedColumns.value);
 
 watch(filterValues.value, (newData) => {
   isLoading.value = true;
@@ -398,7 +396,7 @@ const filteredRows = () => {
 const getColumnArray = (col) => {
   const res = [];
   col.map((c) => {
-    res.push(c.name);
+    res.push(c);
   });
   return res;
 };

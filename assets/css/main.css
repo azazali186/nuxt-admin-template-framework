@@ -83,15 +83,7 @@ body{
   background: url("~/assets/img/main-bg.webp")
 }
 
-table, 
-tbody,
-thead,
-td,
-th,
-tr
-{
-  background: tra;
-}
+
 
 .p-1 {
   padding: 4px;
@@ -570,4 +562,8 @@ td{
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.border-roght-2{
+  border-right: 2px solid var(--primary-color);
 }
