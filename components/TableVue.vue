@@ -378,21 +378,17 @@ watch(pageCount, (newData) => {
 const filteredRows = () => {
   isLoading.value = true;
   const keys = Object.keys(filterValues.value);
-  let response = filteredData.value;
+  let response = data.value;
+  console.log("Kyes are ", keys)
   keys.forEach((key) => {
-    
-    
     if (!filterValues.value[key]) {
       response.value = data?.value?.slice(0, pageCount.value);
     }
-    console.log("filter.value is key value ", response);
-
     const res = response.filter((user) => {
       return String(user[key]) // <-- this line was changed to target 'username' only
         .toLowerCase()
         .includes(filterValues.value[key].toLowerCase());
     });
-    console.log("selected.value is key value ", res)
     response = res;
   });
   selectedData.value = response.slice(0, pageCount.value);
