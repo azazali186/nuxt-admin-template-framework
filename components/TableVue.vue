@@ -151,11 +151,19 @@
             </th>
             <th
               scope="col"
-              :class="' text-center font-extrabold text-base ' + classString"
+              :class=" sortKey.toLowerCase() === col.name.toLowerCase() ? ' text-center font-extrabold text-base cursor-pointer ' + classString + ' active-sorting ' : ' text-center font-extrabold text-base cursor-pointer ' + classString "
               v-for="(col, index) in selectedColumns"
               :key="index"
+              @click="col.sort ? sortTable(col.name) :''"
             >
+            <div v-if="sortKey.toLowerCase() === col.name.toLowerCase()" class="flex gap-2 w-100 justify-center items-center">
+              {{ col.name }} 
+              <Icon v-if="col.sort" :icon="sortOrder === 'asc' ? 'mdi:arrow-up-bold' : 'mdi:arrow-down-bold'" />
+            </div>
+            <div v-else class="flex gap-2 w-100 justify-center items-center">
               {{ col.name }}
+              <Icon v-if="col.sort" icon="pepicons-pop:sort" />
+            </div>
             </th>
           </tr>
         </thead>
@@ -301,6 +309,8 @@ const page = ref(1);
 const pageCount = ref(5);
 const isLoading = ref(false);
 const isOpen = ref(false);
+const sortKey = ref("");
+const sortOrder = ref("asc");
 const pageCountData = ref([
   {
     value: 5,
@@ -350,7 +360,6 @@ const init = computed(() => {
 
 init;
 
-
 watch(filterValues.value, (newData) => {
   isLoading.value = true;
   console.log("queryFilter is ", filterValues.value, " now ", newData);
@@ -377,7 +386,7 @@ const filteredRows = () => {
   isLoading.value = true;
   const keys = Object.keys(filterValues.value);
   let response = data.value;
-  console.log("Kyes are ", keys)
+  console.log("Kyes are ", keys);
   keys.forEach((key) => {
     if (!filterValues.value[key]) {
       response.value = data?.value?.slice(0, pageCount.value);
@@ -390,7 +399,7 @@ const filteredRows = () => {
     response = res;
   });
   selectedData.value = response.slice(0, pageCount.value);
-  filteredData.value = response
+  filteredData.value = response;
 };
 
 const getColumnArray = (col) => {
@@ -409,6 +418,24 @@ const getColumnNameObject = (columnsName) => {
     });
   });
   return data;
+};
+
+const sortTable = (key) => {
+  // if the same key is clicked, reverse the sort order
+  if (sortKey.value === key) {
+    sortOrder.value = sortOrder.value === "asc" ? "desc" : "asc";
+  } else {
+    sortKey.value = key;
+    sortOrder.value = "asc";
+  }
+  filteredData.value = filteredData.value.sort((a, b) => {
+    let modifier = 1;
+    if (sortOrder.value === "desc") modifier = -1;
+    if (a[sortKey.value] < b[sortKey.value]) return -1 * modifier;
+    if (a[sortKey.value] > b[sortKey.value]) return 1 * modifier;
+    return 0;
+  });
+  selectedData.value = filteredData.value.slice(0, pageCount.value);
 };
 
 const isHTML = (str) => {

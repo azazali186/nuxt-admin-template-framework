@@ -148,7 +148,7 @@ const people = [
     name: "Lindsay Walton",
     title: "Front-end Developer",
     email: "lindsay.walton@example.com",
-    role: "admin",
+    role: "Admin",
     action: action,
   },
   {
@@ -345,6 +345,7 @@ const columns = [
   {
     name: "name",
     align: "left",
+    sort: true
   },
   {
     name: "title",
@@ -357,6 +358,7 @@ const columns = [
   {
     name: "role",
     align: "center",
+    sort: true
   },
   {
     name: "action",

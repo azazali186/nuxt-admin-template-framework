@@ -567,3 +567,7 @@ td{
 .border-roght-2{
   border-right: 2px solid var(--primary-color);
 }
+
+.active-sorting{
+  color: var(--secondary-background-color) !important;
+}
