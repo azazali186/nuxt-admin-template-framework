@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const useCommonStore = defineStore("header", () => {
+export const useCommonStore = defineStore("common", () => {
   const headerValue = ref("");
   const activeMenu = ref("");
   const getHeaderValue = computed(() => headerValue.value);
