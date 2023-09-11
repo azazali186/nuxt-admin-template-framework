@@ -20,6 +20,7 @@
     "@nuxt/typescript-runtime": "latest",
     "@nuxt/ui": "^2.8.0",
     "@pinia/nuxt": "latest",
+    "@vuepic/vue-datepicker": "^6.0.3",
     "pinia": "latest"
   }
 }

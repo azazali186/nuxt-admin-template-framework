@@ -5,7 +5,10 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
     '@nuxt/ui'
-  ]
+  ],
+  build: {
+    transpile: ['@vuepic/vue-datepicker']
+}
 })
 
 

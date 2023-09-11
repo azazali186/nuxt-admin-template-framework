@@ -1,13 +1,38 @@
 <template>
   <NuxtLayout>
     <div class="bg-transparent-all">
-      <TableVue title="Users Management" :data="people" :columns="columns" />
+      <TableVue title="Users Management" :data="people" :columns="columns" :filters="filter" />
     </div>
   </NuxtLayout>
 </template>
 
 <script setup>
 import TableVue from "~/components/TableVue.vue";
+
+const filter = {
+  search: [
+    {
+      name: "name"
+    },
+    {
+      name: "title"
+    },
+    {
+      name: "email"
+    },
+    {
+      name: "role"
+    }
+  ],
+  date:[
+    {
+      name: "created_at"
+    },
+    {
+      name: "updated_at"
+    }
+  ]
+}
 
 const actionCssClass =
   "bg-transparent-all border-2 px-3 py-1 border-white rounded-full uppercase cursor-pointer hover:border-10 hover:border-purple-300 hover:transition hover:ease-in-out focus:border-purple-600 hover:text-purple-300";
@@ -24,9 +49,9 @@ const people = [
   {
     id: 1,
     name: "Lindsay Walton",
-    title: "Front-end Developer",
-    email: "lindsay.walton@example.com",
-    role: "Member",
+    title: "Back-end Developer",
+    email: "lindsay.walton@gmail.com",
+    role: "Admin",
     action: action,
   },
   {

@@ -1,5 +1,5 @@
 <template>
-  <div class="table-view bg-transparent-all">
+  <div class="table-view bg-transparent-all" v-if="isLoading == false">
     <div class="table-title text-center text-3xl font-extrabold my-5">
       {{ title || "Welcome to UI Framework World" }}
     </div>
@@ -107,26 +107,31 @@
     </div>
 
     <div class="flex justify-between items-center w-100">
-      <div class="ml-10 mb-3 bg-transparent-all">
+      <div class="ml-10 mb-3 flex gap-5 items-center bg-transparent-all">
         <UInput
-          v-model="queryFilter"
+          v-for="fsearch in filter.search"
+          v-model="filterValues[fsearch.name]"
           class="bg-transparent-all p-2 bg-transparent-all w-100"
-          placeholder="Filter ..."
-          :onchange="filteredRows"
+          :placeholder="fsearch.name.toUpperCase() + ' filter...'"
+        />
+        <VueDatePicker
+          v-for="fdate in filter.date"
+          :model="filterValues[fdate.name]"
         />
       </div>
       <div class="flex gap-5 justify-between items-center mr-10">
         <UButton
-            color="transparent"
-            variant="outline"
-            class="rtl:[&_span:last-child]:rotate-180 ml-2-i bg-transparent-all"
-          >
-            Add
-            <Icon
-              icon="zondicons:add-outline"
-              class="w-5 h-5 transition-transform bg-transparent-all"
-            />
-          </UButton>
+          color="transparent"
+          variant="outline"
+          class="ml-2-i bg-transparent-all"
+          @click="isOpen = true"
+        >
+          Add
+          <Icon
+            icon="zondicons:add-outline"
+            class="w-5 h-5 transition-transform bg-transparent-all"
+          />
+        </UButton>
       </div>
     </div>
 
@@ -249,19 +254,54 @@
       </UPagination>
     </div>
   </div>
+
+  <div class="loading-screen" v-if="isLoading">
+    <div class="loader"></div>
+  </div>
+
+  <UModal v-model="isOpen" :overlay="false">
+    <UCard
+      :ui="{
+        base: 'h-full min-h-[400px] min-w-[200px] border-2 border-solid rounded border-white backdrop-blur-4px flex flex-col',
+        background: ' bg-transparent-all ',
+        rounded: '',
+        divide: 'divide-y divide-gray-100 dark:divide-gray-800',
+        body: {
+          base: 'grow',
+        },
+      }"
+    >
+      <template #header>
+        <!-- Content -->
+      </template>
+      <!-- Content -->
+      <template #footer>
+        <!-- Content -->
+      </template>
+    </UCard>
+  </UModal>
 </template>
 
 <script setup>
 import { _1 } from "#tailwind-config/theme/aspectRatio";
 import { Icon } from "@iconify/vue";
-const props = defineProps({ data: Array, title: String, columns: Array });
+import VueDatePicker from "./filters/DatePickerFilterVue.vue";
+const props = defineProps({
+  data: Array,
+  title: String,
+  columns: Array,
+  filters: Object,
+});
 const data = ref(props.data);
+const filter = ref(props.filters);
+const filterValues = ref({});
 const filteredData = ref(props.data);
 const title = ref(props.title);
 const columns = ref(props.columns);
-import Card from "./CardVue.vue";
 const page = ref(1);
 const pageCount = ref(5);
+const isLoading = ref(false);
+const isOpen = ref(false);
 const pageCountData = ref([
   {
     value: 5,
@@ -291,6 +331,7 @@ const classString = ref(
 const queryFilter = ref("");
 
 onMounted(() => {
+  isLoading.value = true;
   if (!columns.value)
     if (data?.value?.length > 0) {
       columns.value = getColumnNameObject(Object.keys(data.value[0]));
@@ -298,13 +339,25 @@ onMounted(() => {
 
   selectedColumns.value = getColumnArray(columns.value);
   selectedData.value = data?.value?.slice(0, pageCount.value);
-
-  console.log("selectedData: onMounted ", pageCount.value);
+  isLoading.value = false;
+  console.log("mounted called ", selectedColumns.value);
 });
 
-watch(queryFilter, (newData) => {
-  console.log("selectedData: ", selectedData.value);
-  console.log("queryFilter is " + queryFilter + " now " + newData);
+const init = computed(() => {
+  console.log("init called ", selectedColumns.value);
+  selectedData.value = data?.value?.slice(0, pageCount.value);
+  filteredData.value = data?.value;
+});
+
+init;
+
+console.log("selectedColumns.value   ", selectedColumns.value);
+
+watch(filterValues.value, (newData) => {
+  isLoading.value = true;
+  console.log("queryFilter is ", filterValues.value, " now ", newData);
+  filteredRows();
+  isLoading.value = false;
 });
 
 watch(page, (newData) => {
@@ -322,25 +375,29 @@ watch(pageCount, (newData) => {
   selectedData.value = filteredData.value.slice(0, newData);
 });
 
-const filteredRows = computed(() => {
-  console.log("fileter called");
-  if (!queryFilter.value) {
-    selectedData.value = data?.value;
-    filteredData.value = data?.value;
-    return data;
-  }
-  const res = data.value.filter((user) => {
-    return Object.values(user).some((value) => {
-      return String(value)
+const filteredRows = () => {
+  isLoading.value = true;
+  const keys = Object.keys(filterValues.value);
+  let response = filteredData.value;
+  keys.forEach((key) => {
+    
+    
+    if (!filterValues.value[key]) {
+      response.value = data?.value?.slice(0, pageCount.value);
+    }
+    console.log("filter.value is key value ", response);
+
+    const res = response.filter((user) => {
+      return String(user[key]) // <-- this line was changed to target 'username' only
         .toLowerCase()
-        .includes(queryFilter.value.toLowerCase());
+        .includes(filterValues.value[key].toLowerCase());
     });
+    console.log("selected.value is key value ", res)
+    response = res;
   });
-  filteredData.value = res;
-  selectedData.value = res.slice(0, pageCount.value);
-  console.log("res length ", res.length);
-  return res;
-});
+  selectedData.value = response.slice(0, pageCount.value);
+  filteredData.value = response
+};
 
 const getColumnArray = (col) => {
   const res = [];
