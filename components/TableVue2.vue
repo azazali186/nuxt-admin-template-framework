@@ -4,7 +4,8 @@
       {{ title || "Welcome to UI Framework World" }}
     </div>
 
-    <div class="w-fit mb-3 ">
+    <div class="w-fit flex mb-3 mx-10 ">
+      <UCheckbox color="primary" class="" v-model="selected" name="select" label="Select All" />
       <USelectMenu
         v-slot="{ open }"
         v-model="selectedColumns"
@@ -109,12 +110,12 @@
     </div>
 
     <div class="flex justify-between items-center w-100">
-      <div class="ml-10 mb-3 flex gap-5 items-center bg-transparent-all">
+      <div class="ml-10 mb-3 flex gap-2 items-center bg-transparent-all">
         <UInput
           v-for="fsearch in filter.search"
           v-model="filterValues[fsearch.name]"
-          class="bg-transparent-all p-2 bg-transparent-all w-100"
-          :placeholder="fsearch.name.toUpperCase() + ' filter...'"
+          class="bg-transparent-all p-1 bg-transparent-all w-100"
+          :placeholder="camelToSpace(fsearch.name).toUpperCase() + ' filter...'"
         />
         <VueDatePicker
           v-for="fdate in filter.date"
@@ -185,11 +186,12 @@
               :key="index"
             >
               <div
-                v-if="isHTML(item[col?.name])"
-                v-html="item[col?.name]"
+                v-if="isHTML(item[col?.value])"
+                v-html="item[col?.value]"
               ></div>
-              <div v-else-if="col?.name.toLowerCase() === 'status'">{{ getStatus(item[col?.name]) }}</div>
-              <div v-else>{{ item[col?.name] }}</div>
+              <div v-else-if="col?.value.toLowerCase() === 'status'">{{ getStatus(item[col?.value]+'') }}</div>
+              <div v-else-if="col?.value.toLowerCase() === 'gender'">{{ (item[col?.value]) == 'M' ? 'MALE' : 'FEMALE' }}</div>
+              <div v-else>{{ replaceUnderscore(item[col?.value]+"") }}</div>
             </td>
           </tr>
         </tbody>
@@ -310,15 +312,13 @@ const filteredData = ref(props.data);
 const title = ref(props.title);
 const columns = ref(props.columns);
 const page = ref(1);
-const pageCount = ref(5);
+const pageCount = ref(10);
 const isLoading = ref(true);
 const isOpen = ref(false);
 const sortKey = ref("");
+const selected = ref(false);
 const sortOrder = ref("asc");
 const pageCountData = ref([
-  {
-    value: 5,
-  },
   {
     value: 10,
   },
@@ -338,7 +338,7 @@ const pageCountData = ref([
 const selectedColumns = ref([]);
 const selectedData = ref([]);
 const classString = ref(
-  "px-6 py-2 bg-transparent-all border-2 border-solid border-white min-w-[50px]"
+  "px-2 py-2 bg-transparent-all border-2 border-solid border-white min-w-[150px]"
 );
 
 const queryFilter = ref("");
@@ -414,6 +414,7 @@ const getColumnArray = (col) => {
   col.map((c) => {
     res.push(c);
   });
+  
   return res;
 };
 
@@ -454,13 +455,22 @@ function camelToSpace(str) {
     return str.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([A-Z])([A-Z][a-z])/g, '$1 $2');
 }
 
+function replaceUnderscore(str) {
+
+    if(str.trim() == "" || str.trim() == "null"){
+      return "";
+    }
+    return str.replaceAll("_", " ");
+}
+
 const getStatus = (status) =>{
+  console.log("status is " + status);
   switch (status) {
     case '1':
-        return 'ACTIVE'
+        return 'Normal'
   
     default:
-      return 'INACTIVE'
+      return 'Freeze'
   }
 }
 </script>

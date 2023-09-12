@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --port=8000",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -21,6 +21,7 @@
     "@nuxt/ui": "^2.8.0",
     "@pinia/nuxt": "latest",
     "@vuepic/vue-datepicker": "^6.0.3",
-    "pinia": "latest"
+    "pinia": "latest",
+    "valibot": "^0.15.0"
   }
 }

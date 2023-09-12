@@ -3,7 +3,7 @@
     <div class="nav-head">
       <AppSidebar />
     </div>
-    <div class="w-100 p-1">
+    <div class="w-calc-100 p-1">
       <AppHeader />
 
       <div class="page-content">
@@ -22,4 +22,5 @@ import AppSidebar from "./app/sidebar";
 import { useCommonStore } from "../store/commonStore";
 const store = useCommonStore();
 store.init()
+
 </script>

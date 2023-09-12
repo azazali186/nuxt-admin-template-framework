@@ -5,7 +5,7 @@
   --secondary-background-color: #7367f5;
   --primary-surface-text-color: #ffffff;
   --primary-background-surface: #0b1f50;
-  --background-color: #18181b;
+  --background-color: #000000;
   --item-option-border: #ffffff;
 }
 
@@ -80,7 +80,8 @@ ul {
 }
 
 body{
-  background: url("~/assets/img/main-bg.webp")
+  /* background: url("~/assets/img/main-bg.webp") */
+  background: var(--background-color);
 }
 
 
@@ -226,6 +227,7 @@ body{
 }
 .page-content {
   height: calc(100% - 120px);
+  width: 100%;
   overflow: scroll;
   background: transparent;
 }
@@ -570,4 +572,54 @@ td{
 
 .active-sorting{
   color: var(--secondary-background-color) !important;
+}
+
+.table-wrapper {
+  position: relative;
+  overflow-x: auto;
+  margin: 0;
+  padding: 0;
+  margin: 0 20px;
+  max-width: 100%; /* Set this to the maximum width you want for your table */
+}
+
+table {
+  width: max-content;
+  border-collapse: collapse;
+}
+
+th:first-child, td:first-child {
+  position: sticky;
+  background-color: black;
+  z-index: 1;
+  left: 0;
+  min-width: none !important;
+  width: 50px !important;
+}
+
+th:last-child, td:last-child {
+  position: sticky;
+  background-color: black;
+  z-index: 1;
+  right:0;
+}
+
+.right {
+  right: 0;
+}
+
+.w-calc-100{
+  width: calc(100% - 200px);
+}
+
+thead th {
+
+  font-size: 12px;
+
+}
+
+tbody td {
+
+  font-size: 10px;
+
 }

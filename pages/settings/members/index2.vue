@@ -1,11 +1,11 @@
 <template>
   <NuxtLayout>
     <div class="bg-transparent-all">
-      <TableVue
+      <TableVue2
         v-if="data"
         title="Members Management"
         :data="data"
-        :columns="column"
+        :columns="column2"
         :filters="filters"
       />
     </div>
@@ -32,43 +32,111 @@ const requestParams = ref({
 const url = ref(BASE_URL + "/vip-member/vip_member/get_list");
 
 const data = ref();
+const column = ref();
 
-const column = ref([
+const column2 = ref([
   {
-    lable: "member card number",
-    name: "cardNumber",
+    name: "memberCardNumber",
     sort: true,
     align: "left",
+    value: "cardNumber"
+  },  
+  {
+    name: "memberName",
+    sort: true,
+    align: "center",
+    value: "memberName"
   },
   {
-    lable: "User Id",
-    name: "userId",
-    sort: true,
-    align: "left",
+    name: "username",
+    sort: false,
+    align: "center",
+    value: "username"
   },
   {
-    lable: "member card number",
-    name: "cardNumber",
-    sort: true,
-    align: "left",
+    name: "grade",
+    sort: false,
+    align: "center",
+    value: "grade"
   },
   {
-    lable: "card uuid",
-    name: "cardUUID",
-    sort: true,
-    align: "left",
+    name: "gender",
+    sort: false,
+    align: "center",
+    value: "gender"
   },
   {
-    lable: "member card number",
-    name: "cardNumber",
-    sort: true,
-    align: "left",
+    name: "date of birth",
+    sort: false,
+    align: "center",
+    value: "birthdate"
+  }, 
+  {
+    name: "telephone",
+    sort: false,
+    align: "center",
+    value: "telephone"
+  }, 
+  {
+    name: "broker",
+    sort: false,
+    align: "center",
+    value: "brokerCardNumber"
+  },   
+  {
+    name: "commission rate",
+    sort: false,
+    align: "right",
+    value: "commissionRate"
   },
   {
-    lable: "member card number",
-    name: "cardNumber",
-    sort: true,
-    align: "left",
+    name: "Level Point",
+    sort: false,
+    align: "right",
+    value: "gradeScore"
+  },
+  {
+    name: "available Points",
+    sort: false,
+    align: "right",
+    value: "availablePoint"
+  },
+  {
+    name: "hide Points",
+    sort: false,
+    align: "right",
+    value: "hidePoint"
+  },
+  {
+    name: "status",
+    sort: false,
+    align: "center",
+    value: "status"
+  },
+  {
+    name: "registration time",
+    sort: false,
+    align: "center",
+    value: "createdAt"
+  },
+  {
+    name: "last scan time",
+    sort: false,
+    align: "center",
+    value: "lastTranAt"
+  },
+  {
+    name: "last scan type",
+    sort: false,
+    align: "center",
+    value: "lastTranType"
+  },
+  {
+    lable: "Action",
+    name: "action",
+    sort: false,
+    align: "center",
+    value: "action"
   },
 ]);
 
@@ -100,7 +168,7 @@ const filters = ref({
 const totalCount = ref();
 
 const actionCssClass =
-  "bg-transparent-all border-2 px-3 py-1 border-white rounded-full uppercase cursor-pointer hover:border-10 hover:border-purple-300 hover:transition hover:ease-in-out focus:border-purple-600 hover:text-purple-300";
+  "bg-transparent-all border-2 px-2 border-white rounded-full uppercase cursor-pointer hover:border-10 hover:border-purple-300 hover:transition hover:ease-in-out focus:border-purple-600 hover:text-purple-300";
 
 const action = `<div class="flex bg-transparent-all gap-2">
                 <span class="${actionCssClass}">edit</span>
