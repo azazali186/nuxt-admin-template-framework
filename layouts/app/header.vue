@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="title">
-      {{ store.headerValue || "" }}
+      {{ store.headerValue.value || "" }}
     </div>
     <div class="header-icons">
       <span id="languages">

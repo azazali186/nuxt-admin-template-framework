@@ -7,7 +7,7 @@
         "childs": []
     },
     {
-        "name": "Settings",
+        "name": "Masters",
         "path":"",
         "icon": "iconoir:tools",
         "permissions": [],
@@ -51,35 +51,6 @@
                 "name": "Countries",
                 "path":"/settings/countries",
                 "icon": "arcticons:flags",
-                "permissions": [],
-                "childs": []
-            }
-        ]
-    },
-    {
-        "name": "Generator",
-        "path":"",
-        "icon": "carbon:id-management",
-        "permissions": [],
-        "childs": [
-            {
-                "name": "Report",
-                "path":"/generator/reports-generator",
-                "icon": "tabler:report",
-                "permissions": [],
-                "childs": []
-            },
-            {
-                "name": "Form",
-                "path":"/generator/forms-generator",
-                "icon": "mdi:form-outline",
-                "permissions": [],
-                "childs": []
-            },
-            {
-                "name": "CRUD",
-                "path":"/generator/crud-generator",
-                "icon": "codicon:git-pull-request-create",
                 "permissions": [],
                 "childs": []
             }

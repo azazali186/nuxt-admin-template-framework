@@ -4,7 +4,7 @@
       {{ title || "Welcome to UI Framework World" }}
     </div>
 
-    <div class="w-fit mb-3 ">
+    <div class="w-fit mb-3">
       <USelectMenu
         v-slot="{ open }"
         v-model="selectedColumns"
@@ -17,17 +17,17 @@
         :ui-menu="{
           option: { base: 'cursor-pointer uppercase bg-transparent-all' },
         }"
+        v-if="data.length > 0"
       >
         <UButton color="transparent" variant="outline" class="px-4 ml-10">
           {{
-            selectedColumns.length < 5 ?
-            selectedColumns
-              .map((v) => {
-                return v.name.toUpperCase();
-              })
-              .join(" ,")
-              : 
-              selectedColumns.length
+            selectedColumns.length < 5
+              ? selectedColumns
+                  .map((v) => {
+                    return v.name.toUpperCase();
+                  })
+                  .join(" ,")
+              : selectedColumns.length
           }}
           <Icon
             icon="material-symbols:arrow-right"
@@ -37,7 +37,7 @@
         </UButton>
       </USelectMenu>
     </div>
-    <div class="w-100 px-10 flex mb-3 bg-transparent-all justify-between">
+    <div class="w-100 px-10 flex mb-3 bg-transparent-all justify-between" v-if="data.length > 0">
       <div class="flex bg-transparent-all">
         <span> Rows Per Page </span>
         <USelectMenu
@@ -108,8 +108,8 @@
       </UPagination>
     </div>
 
-    <div class="flex justify-between items-center w-100">
-      <div class="ml-10 mb-3 flex gap-5 items-center bg-transparent-all">
+    <div class="flex justify-between items-center w-100" >
+      <div class="ml-10 mb-3 flex gap-5 items-center bg-transparent-all" v-if="data.length > 0">
         <UInput
           v-for="fsearch in filter.search"
           v-model="filterValues[fsearch.name]"
@@ -137,9 +137,7 @@
       </div> -->
     </div>
 
-    <div
-      class="table-wrapper"
-    >
+    <div class="table-wrapper">
       <table
         class="table w-full text-sm text-left bg-transparent-all"
         v-if="data?.length > 0"
@@ -154,19 +152,38 @@
             </th> -->
             <th
               scope="col"
-              :class=" sortKey.toLowerCase() === col.name.toLowerCase() ? ' text-center font-bold cursor-pointer ' + classString + ' active-sorting ' : ' text-center font-bold cursor-pointer ' + classString "
+              :class="
+                sortKey.toLowerCase() === col.name.toLowerCase()
+                  ? ' text-center font-bold cursor-pointer ' +
+                    classString +
+                    ' active-sorting '
+                  : ' text-center font-bold cursor-pointer ' + classString
+              "
               v-for="(col, index) in selectedColumns"
               :key="index"
-              @click="col.sort ? sortTable(col.name) :''"
+              @click="col.sort ? sortTable(col.name) : ''"
             >
-            <div v-if="sortKey.toLowerCase() === col.name.toLowerCase()" class="flex gap-2 flex-nowrap w-100 justify-center items-center">
-              {{ camelToSpace(col.name) }} 
-              <Icon v-if="col.sort" :icon="sortOrder === 'asc' ? 'mdi:arrow-up-bold' : 'mdi:arrow-down-bold'" />
-            </div>
-            <div v-else class="flex gap-2 w-100 flex-nowrap justify-center items-center">
-              {{ camelToSpace(col.name) }}
-              <Icon v-if="col.sort" icon="pepicons-pop:sort" />
-            </div>
+              <div
+                v-if="sortKey.toLowerCase() === col.name.toLowerCase()"
+                class="flex gap-2 flex-nowrap w-100 justify-center items-center"
+              >
+                {{ camelToSpace(col.name) }}
+                <Icon
+                  v-if="col.sort"
+                  :icon="
+                    sortOrder === 'asc'
+                      ? 'mdi:arrow-up-bold'
+                      : 'mdi:arrow-down-bold'
+                  "
+                />
+              </div>
+              <div
+                v-else
+                class="flex gap-2 w-100 flex-nowrap justify-center items-center"
+              >
+                {{ camelToSpace(col.name) }}
+                <Icon v-if="col.sort" icon="pepicons-pop:sort" />
+              </div>
             </th>
           </tr>
         </thead>
@@ -188,15 +205,30 @@
                 v-if="isHTML(item[col?.name])"
                 v-html="item[col?.name]"
               ></div>
-              <div v-else-if="col?.name.toLowerCase() === 'status'">{{ getStatus(item[col?.name]) }}</div>
-              <div v-else>{{ item[col?.name] }}</div>
+              <div v-else-if="col?.name.toLowerCase() === 'status'">
+                {{ getStatus(item[col?.name]) }}
+              </div>
+              <div v-else>
+                {{
+                  col?.value
+                    ? getValueFromDotNotation(item, col.value)
+                    : item[col?.name]
+                }}
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
-      <div v-else>No Data Available</div>
+      <div v-else class="flex justify-center items-center">
+        <div>
+          <img src="~/assets/img/nodatafound.png" alt="">
+        </div>
+        <h1>
+          No Data Available
+        </h1>
+      </div>
     </div>
-    <div class="w-100 px-10 flex my-3 bg-transparent-all justify-between">
+    <div class="w-100 px-10 flex my-3 bg-transparent-all justify-between" v-if="data.length > 0">
       <div class="flex">
         <span> Rows Per Page </span>
         <USelectMenu
@@ -345,14 +377,13 @@ const queryFilter = ref("");
 
 onMounted(() => {
   isLoading.value = true;
-  console.log("columns values are ", columns.value)
-  
+  console.log("columns values are ", columns.value);
+
   if (!columns.value)
     if (data?.value?.length > 0) {
       columns.value = getColumnNameObject(Object.keys(data.value[0]));
     }
 
-    
   selectedColumns.value = getColumnArray(columns.value);
   selectedData.value = data?.value?.slice(0, pageCount.value);
   isLoading.value = false;
@@ -364,6 +395,10 @@ const init = computed(() => {
   selectedData.value = data?.value?.slice(0, pageCount.value);
   filteredData.value = data?.value;
 });
+
+const getValueFromDotNotation = (obj, path) => {
+  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
+};
 
 init;
 
@@ -451,16 +486,18 @@ const isHTML = (str) => {
 };
 
 function camelToSpace(str) {
-    return str.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([A-Z])([A-Z][a-z])/g, '$1 $2');
+  return str
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/([A-Z])([A-Z][a-z])/g, "$1 $2");
 }
 
-const getStatus = (status) =>{
+const getStatus = (status) => {
   switch (status) {
-    case '1':
-        return 'ACTIVE'
-  
+    case "1":
+      return "ACTIVE";
+
     default:
-      return 'INACTIVE'
+      return "INACTIVE";
   }
-}
+};
 </script>

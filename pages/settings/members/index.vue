@@ -13,62 +13,53 @@
 </template>
 
 <script setup>
+
 import { useCommonAPIStore } from "~/store/commonAPIStore";
-import { useAuthStore } from "~/store/authStore";
+import { useAuthStore } from "~/store/auth";
 import { BASE_URL } from "~/constants";
 const apiStore = useCommonAPIStore();
 const authStore = useAuthStore();
 
 const requestParams = ref({
-  username: "",
-  status: "",
-  citizen: "",
+  email: "",
   startDate: "",
   endDate: "",
-  offset: 0,
-  limit: 100,
-  memberCardNumber: "",
 });
-const url = ref(BASE_URL + "/vip-member/vip_member/get_list");
+const url = ref(BASE_URL + "/auth-service/members");
 
 const data = ref();
 
 const column = ref([
   {
-    lable: "member card number",
-    name: "cardNumber",
+    name: "id",
     sort: true,
     align: "left",
   },
   {
-    lable: "User Id",
-    name: "userId",
+    name: "Role",
     sort: true,
-    align: "left",
+    align: "center",
+    value: "Role.name"
   },
   {
-    lable: "member card number",
-    name: "cardNumber",
+    name: "email",
     sort: true,
-    align: "left",
+    align: "center",
   },
   {
-    lable: "card uuid",
-    name: "cardUUID",
+    name: "status",
     sort: true,
-    align: "left",
+    align: "center",
   },
   {
-    lable: "member card number",
-    name: "cardNumber",
+    name: "isActive",
     sort: true,
-    align: "left",
+    align: "center",
   },
   {
-    lable: "member card number",
-    name: "cardNumber",
+    name: "createdAt",
     sort: true,
-    align: "left",
+    align: "center",
   },
 ]);
 
@@ -78,17 +69,8 @@ const filters = ref({
       name: "userId",
     },
     {
-      name: "cardNumber",
-    },
-    {
-      name: "cardUUID",
-    },
-    {
-      name: "name",
-    },
-    {
-      name: "username",
-    },
+      name: "email",
+    }
   ],
   date:[
     {
@@ -111,51 +93,19 @@ const action = `<div class="flex bg-transparent-all gap-2">
               </div>`;
 
 onMounted(async () => {
-  authStore.getToken;
-  let token = authStore.token;
+  let token = authStore.auth.token;
   console.log("Mounted token = " + token);
-  const res = await apiStore.postAPIRequest(
+  const res = await apiStore.getAPIRequest(
     requestParams.value,
     url.value,
-    false,
     token
   );
   console.log("res = ", res);
 
-  if (res.code === 0) {
-    data.value = res.data.list;
+  if (res.status === 200 ) {
+    data.value = res.data;
     data.value.forEach((person) => (person.action = action));
     totalCount.value = res.data.totalCount;
-
-    column.value = getColumnsData(Object.keys(res.data.list[0]));
-    console.log(" column.value  ", column.value);
   }
 });
-
-watch(column.value, (newData) => {
-  console.log("Column new data ", newData);
-});
-
-const getColumnsData = (keysData) => {
-  const result = [];
-  keysData.forEach((k) => {
-
-    if (k.toLowerCase().includes("id") || k.toLowerCase().includes("status")) {
-      result.push({
-        name: k,
-        sort: true,
-        align: "center",
-      });
-    } else if (k.toLowerCase().includes("photo") || k.toLowerCase().includes("code")) {
-
-    } else {
-      result.push({
-        name: k,
-        sort: true,
-        align: "left",
-      });
-    }
-  });
-  return result;
-};
 </script>

@@ -22,6 +22,10 @@ const menuName = ref(props.menuName);
 import { useCommonStore } from "../../../store/commonStore";
 const store = useCommonStore();
 
+console.log("store.getActiveMenu  item  ", store.getActiveMenu);
+console.log("store.getHeaderValue  item  ", store.getHeaderValue);
+console.log("data?.value?.name  item  ", data?.value?.name);
+
 const setAttributes = () => {
   store.setHeaderStore(data.value.name);
   if (menuName.value) store.setActiveMenu(menuName.value);

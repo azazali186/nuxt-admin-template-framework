@@ -24,6 +24,9 @@ const store = useCommonStore();
 const classVal = ref("");
 
 onMounted(() => {
+  console.log("store.getActiveMenu   ", store.getActiveMenu)
+  console.log("store.getHeaderValue   ", store.getHeaderValue)
+  console.log("data?.value?.name   ", data?.value?.name)
   if (
     store.getActiveMenu?.toLowerCase() == data?.value?.name?.toLowerCase() ||
     store.getHeaderValue?.toLowerCase() == data?.value?.name?.toLowerCase()

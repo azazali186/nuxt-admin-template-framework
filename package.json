@@ -19,9 +19,16 @@
     "@nuxt/typescript-build": "latest",
     "@nuxt/typescript-runtime": "latest",
     "@nuxt/ui": "^2.8.0",
-    "@pinia/nuxt": "latest",
     "@vuepic/vue-datepicker": "^6.0.3",
-    "pinia": "latest",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@pinia-plugin-persistedstate/nuxt": "^1.1.2",
+    "@pinia/nuxt": "^0.4.11",
+    "pinia": "^2.1.6",
+    "pinia-plugin-persistedstate": "^3.2.0",
+    "sass": "^1.68.0",
     "valibot": "^0.15.0"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }
