@@ -3,7 +3,7 @@
     <UCard class="bg-transparent-all">
       <UForm :validate="validate" :state="state" @submit="submit">
         <UFormGroup label="Email" name="email" class="my-3 ">
-          <UInput v-model="state.email" />
+          <UInput v-model="state.username" />
         </UFormGroup>
 
         <UFormGroup label="Password" name="password">
@@ -22,7 +22,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const state = ref({
-  email: undefined,
+  username: undefined,
   password: undefined,
 });
 
@@ -33,18 +33,18 @@ import { BASE_URL } from '~/constants'
 const authStore = useAuthStore();
 const validate = (state) => {
   const errors = [];
-  if (!state.email) errors.push({ path: "email", message: "Required" });
+  if (!state.username) errors.push({ path: "username", message: "Required" });
   if (!state.password) errors.push({ path: "password", message: "Required" });
   return errors;
 };
 
 async function submit(event) {
   console.log(event.data);
-  const res = await store.postAPIRequest(state.value, BASE_URL+ '/auth-service/auth/login', false)
+  const res = await store.postAPIRequest(state.value, BASE_URL+ '/auth/login', false)
   console.log("function response " , res)
   
   if(res.status !== 401 || res.status !== 403) {
-    authStore.setAuth(res.data)
+    authStore.setAuth(res.data.data)
     router.push('/')
   }
   

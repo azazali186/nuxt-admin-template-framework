@@ -1,11 +1,11 @@
 :root {
-  --primary-text: #fff;
-  --primary-color: #ffffff;
-  --primary-background-color: #0b1f50;
+  --primary-text: #7367f5;
+  --primary-color: #7367f5;
+  --primary-background-color: #ebeef5;
   --secondary-background-color: #7367f5;
   --primary-surface-text-color: #ffffff;
-  --primary-background-surface: #0b1f50;
-  --background-color: #000000;
+  --primary-background-surface: #ebeef5;
+  --background-color: #ebeef5;
   --item-option-border: #ffffff;
 }
 
@@ -522,11 +522,11 @@ td{
 }
 
 #model-open{
-  outline: 1px solid #fff;
+  outline: 1px solid var(--primary-color);
 }
 
 #model-open:hover{
-  outline: 5px solid #fff;
+  outline: 5px solid var(--primary-color);
 }
 
 .backdrop-blur-4px{
@@ -553,7 +553,7 @@ td{
 }
 
 .loader {
-  border: 8px solid #f3f3f3; /* Light grey */
+  border: 8px solid var(--primary-color); /* Light grey */
   border-top: 8px solid var(--primary-background-color); /* Blue */
   border-radius: 50%;
   width: 50px;
@@ -590,7 +590,7 @@ table {
 
 th:first-child, td:first-child {
   position: sticky;
-  background-color: black;
+  background-color: #ebeef5;
   z-index: 1;
   left: 0;
   min-width: none !important;
@@ -599,7 +599,7 @@ th:first-child, td:first-child {
 
 th:last-child, td:last-child {
   position: sticky;
-  background-color: black;
+  background-color: #ebeef5;
   z-index: 1;
   right:0;
 }
@@ -616,6 +616,10 @@ thead th {
 
   font-size: 12px;
 
+}
+
+.border-primary{
+  border: 2px solid var(--primary-color);
 }
 
 tbody td {

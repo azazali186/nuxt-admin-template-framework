@@ -275,7 +275,7 @@
   <UModal v-model="isOpen" :overlay="false">
     <UCard
       :ui="{
-        base: 'h-full min-h-[400px] min-w-[200px] border-2 border-solid rounded border-white backdrop-blur-4px flex flex-col',
+        base: 'h-full min-h-[400px] min-w-[200px] border-2 border-solid rounded border-primary backdrop-blur-4px flex flex-col',
         background: ' bg-transparent-all ',
         rounded: '',
         divide: 'divide-y divide-gray-100 dark:divide-gray-800',
@@ -338,7 +338,7 @@ const pageCountData = ref([
 const selectedColumns = ref([]);
 const selectedData = ref([]);
 const classString = ref(
-  "px-2 py-2 bg-transparent-all border-2 border-solid border-white min-w-[150px]"
+  "px-2 py-2 bg-transparent-all border-2 border-solid border-primary min-w-[150px]"
 );
 
 const queryFilter = ref("");

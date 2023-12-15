@@ -25,7 +25,7 @@ const requestParams = ref({
   startDate: "",
   endDate: "",
 });
-const url = ref(BASE_URL + "/auth-service/users");
+const url = ref(BASE_URL + "/users");
 
 const data = ref();
 
@@ -39,10 +39,10 @@ const column = ref([
     name: "Role",
     sort: true,
     align: "center",
-    value: "Role.name"
+    value: "roles.name"
   },
   {
-    name: "email",
+    name: "username",
     sort: true,
     align: "center",
   },
@@ -57,7 +57,7 @@ const column = ref([
     align: "center",
   },
   {
-    name: "createdAt",
+    name: "created_at",
     sort: true,
     align: "center",
   },
@@ -71,15 +71,12 @@ const column = ref([
 const filters = ref({
   search: [
     {
-      name: "userId",
-    },
-    {
-      name: "email",
+      name: "username",
     }
   ],
   date:[
     {
-      name: 'createdAt'
+      name: 'created_at'
     }
   ]
 });
@@ -87,7 +84,7 @@ const filters = ref({
 const totalCount = ref();
 
 const actionCssClass =
-  "bg-transparent-all border-2 px-3 py-1 border-white rounded-full uppercase cursor-pointer hover:border-10 hover:border-purple-300 hover:transition hover:ease-in-out focus:border-purple-600 hover:text-purple-300";
+  "bg-transparent-all border-2 px-3 py-1 border-primary rounded-full uppercase cursor-pointer hover:border-10 hover:border-purple-300 hover:transition hover:ease-in-out focus:border-purple-600 hover:text-purple-300";
 
 const action = `<div class="flex justify-center bg-transparent-all gap-2">
                 <span class="${actionCssClass}">edit</span>
@@ -108,7 +105,7 @@ onMounted(async () => {
   console.log("res = ", res);
 
   if (res.status === 200 ) {
-    data.value = res.data;
+    data.value = res.data.data.list;
     data.value.forEach((person) => (person.action = action));
     totalCount.value = res.data.totalCount;
   }

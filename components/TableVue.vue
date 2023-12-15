@@ -154,7 +154,7 @@
               scope="col"
               :class="
                 sortKey.toLowerCase() === col.name.toLowerCase()
-                  ? ' text-center font-bold cursor-pointer ' +
+                  ? ' text-center text-xl font-bold cursor-pointer ' +
                     classString +
                     ' active-sorting '
                   : ' text-center font-bold cursor-pointer ' + classString
@@ -165,7 +165,7 @@
             >
               <div
                 v-if="sortKey.toLowerCase() === col.name.toLowerCase()"
-                class="flex gap-2 flex-nowrap w-100 justify-center items-center"
+                class="flex gap-2  text-xl flex-nowrap w-100 justify-center items-center"
               >
                 {{ camelToSpace(col.name) }}
                 <Icon
@@ -179,7 +179,7 @@
               </div>
               <div
                 v-else
-                class="flex gap-2 w-100 flex-nowrap justify-center items-center"
+                class="flex gap-2 w-100  text-xl flex-nowrap justify-center items-center"
               >
                 {{ camelToSpace(col.name) }}
                 <Icon v-if="col.sort" icon="pepicons-pop:sort" />
@@ -195,20 +195,21 @@
             <td
               :class="
                 col?.align
-                  ? ' text-' + col.align + ' ' + classString
+                  ? ' text-' + col.align + ' text-base ' + classString
                   : classString
               "
               v-for="(col, index) in selectedColumns"
               :key="index"
             >
               <div
+              class="text-base"
                 v-if="isHTML(item[col?.name])"
                 v-html="item[col?.name]"
               ></div>
-              <div v-else-if="col?.name.toLowerCase() === 'status'">
+              <div class="text-base" v-else-if="col?.name.toLowerCase() === 'status'">
                 {{ getStatus(item[col?.name]) }}
               </div>
-              <div v-else>
+              <div class="text-base" v-else>
                 {{
                   col?.value
                     ? getValueFromDotNotation(item, col.value)
@@ -305,7 +306,7 @@
   <UModal v-model="isOpen" :overlay="false">
     <UCard
       :ui="{
-        base: 'h-full min-h-[400px] min-w-[200px] border-2 border-solid rounded border-white backdrop-blur-4px flex flex-col',
+        base: 'h-full min-h-[400px] min-w-[200px] border-2 border-solid rounded border-primary backdrop-blur-4px flex flex-col',
         background: ' bg-transparent-all ',
         rounded: '',
         divide: 'divide-y divide-gray-100 dark:divide-gray-800',
@@ -370,7 +371,7 @@ const pageCountData = ref([
 const selectedColumns = ref([]);
 const selectedData = ref([]);
 const classString = ref(
-  "px-6 py-2 bg-transparent-all border-2 border-solid border-white min-w-[50px]"
+  "px-6 py-2 text-base bg-transparent-all border-2 border-solid border-primary min-w-[50px]"
 );
 
 const queryFilter = ref("");
@@ -405,6 +406,13 @@ init;
 watch(filterValues.value, (newData) => {
   isLoading.value = true;
   console.log("queryFilter is ", filterValues.value, " now ", newData);
+  filteredRows();
+  isLoading.value = false;
+});
+
+watch(selectedData, (newData) => {
+  isLoading.value = true;
+  console.log("selectedData is ", selectedData.value, " now ", newData);
   filteredRows();
   isLoading.value = false;
 });

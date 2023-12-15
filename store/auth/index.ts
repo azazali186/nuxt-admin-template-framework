@@ -27,7 +27,7 @@ export const useAuthStore = defineStore(
         };
       });
       auth.token = data.token;
-      auth.verified = data.user.profile.isVerify;
+      auth.verified = data.user?.profile?.isVerify || false;
     }
 
     function isAuthenticated(p) {

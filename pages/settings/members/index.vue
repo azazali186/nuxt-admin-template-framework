@@ -82,7 +82,7 @@ const filters = ref({
 const totalCount = ref();
 
 const actionCssClass =
-  "bg-transparent-all border-2 px-3 py-1 border-white rounded-full uppercase cursor-pointer hover:border-10 hover:border-purple-300 hover:transition hover:ease-in-out focus:border-purple-600 hover:text-purple-300";
+  "bg-transparent-all border-2 px-3 py-1 border-primary rounded-full uppercase cursor-pointer hover:border-10 hover:border-purple-300 hover:transition hover:ease-in-out focus:border-purple-600 hover:text-purple-300";
 
 const action = `<div class="flex bg-transparent-all gap-2">
                 <span class="${actionCssClass}">edit</span>
